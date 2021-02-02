@@ -9,8 +9,8 @@ pipeline {
   stages {
     stage('Pre') {
       steps {
-        echo 'Pulling from...' + env.BRANCH_NAME
-      }  
+        echo 'Pulling from...'+env.BRANCH_NAME
+      }
     }
 
     stage('Build') {
@@ -28,7 +28,6 @@ pipeline {
     stage('Deliver') {
       steps {
         sh './jenkins/scripts/deliver.sh'
-        input ' Finished using the web site? (Click "Proceed" to continue)'
         sh './jenkins/scripts/kill.sh'
       }
     }
