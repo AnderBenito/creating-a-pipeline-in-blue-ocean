@@ -1,3 +1,11 @@
+def getEnvFromBranch(branch) {
+  if (branch == 'master') {
+    return 'production'
+  } else {
+    return 'staging'
+  }
+}
+
 pipeline {
   agent {
     docker {
@@ -9,7 +17,7 @@ pipeline {
   stages {
     stage('Pre') {
       steps {
-        echo 'Pulling from...'+env.BRANCH_NAME
+        echo 'Pulling from...'+ getEnvFromBranch(env.BRANCH_NAME)
       }
     }
 
@@ -35,6 +43,6 @@ pipeline {
   }
   environment {
     CI = 'true'
-    NODE_ENV = 'development'
+    NODE_ENV = getEnvFromBranch(env.BRANCH_NAME)
   }
 }
