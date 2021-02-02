@@ -7,6 +7,12 @@ pipeline {
 
   }
   stages {
+    stage('Pre') {
+      steps {
+        echo 'Pulling from...' + env.BRANCH_NAME
+      }  
+    }
+
     stage('Build') {
       steps {
         sh 'npm install'
