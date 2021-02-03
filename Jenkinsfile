@@ -1,23 +1,14 @@
-def getEnvFromBranch(branch) {
-  if (branch == 'master') {
-    return 'production'
-  } else {
-    return 'staging'
-  }
-}
-
 pipeline {
   agent {
-    docker {
-      image 'node:14.15.4-alpine'
-      args '-p 3001:3000'
+    node {
+      label 'test-slave-1'
     }
 
   }
   stages {
     stage('Pre') {
       steps {
-        echo 'Pulling from...'+ getEnvFromBranch(env.BRANCH_NAME)
+        echo 'Pulling from...'+getEnvFromBranch(env.BRANCH_NAME)
       }
     }
 
