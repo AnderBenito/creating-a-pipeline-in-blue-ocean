@@ -1,3 +1,11 @@
+def getEnvFromBranch(branch) {
+  if (branch == 'master') {
+    return 'production'
+  } else {
+    return 'staging'
+  }
+}
+
 pipeline {
   agent {
     node {
